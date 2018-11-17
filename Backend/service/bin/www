@@ -1,0 +1,43 @@
+
+/**
+* Module dependencies
+*/
+app = require('../app')
+http = require('http')
+config = require('../config/config')
+require('../config/db')
+/**
+* Get port from env or use the settings for development as in service/config/appConfig
+*/
+port = normalizePort(config['port'] || 3000)
+app.set('port', port)
+
+/**
+* Create the http server and listen on the port provides
+*/
+server = http.createServer(app)
+
+/**
+* Start server on the port
+*/
+server.listen(port, function(error){
+	if(error){
+		// Specify a user friendly error later
+		console.log("Some error occured starting the server")
+		process.exit(1)
+	}else{
+		console.log("Listening on port " + port)
+	}
+})
+
+
+
+/**
+* Normalize the port to a string, number or false
+*/
+function normalizePort(value){
+	port = parseInt(value, 10)
+	if(isNaN(port)){return value}
+	if(port >= 0){return port}
+	return false
+}
